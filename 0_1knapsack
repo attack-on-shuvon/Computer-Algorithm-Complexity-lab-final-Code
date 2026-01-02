@@ -1,0 +1,53 @@
+
+
+#include <bits/stdc++.h>
+using namespace std;
+vector<int>v;
+
+double o_1knapsack(int profit[],int weight[],int k,int n){
+    int mat[n+1][k+1];
+    for(int i=0;i<=n;i++){
+        for(int j=0;j<=k;j++){
+            if(i==0 || j==0){
+                mat[i][j]=0;
+            }
+            else if(j>=weight[i-1]){
+              mat[i][j]=max(mat[i-1][j],profit[i-1]+mat[i-1][j-weight[i-1]]);
+            }
+            else{
+                mat[i][j]=mat[i-1][j];
+            }
+
+
+        }
+    }
+
+    int i=n,j=k;
+    while(i>0 && j>0){
+        if(mat[i-1][j]!=mat[i][j]){
+            v.push_back(i-1);
+            j-=weight[i-1];
+        }
+        i--;
+    }
+    return mat[n][k];
+
+}
+
+int main(){
+    int p[]={7,12,5,12,15};
+    int w[]={2,3,1,2,4};
+    int knapsack=7;
+    int n=sizeof(p)/sizeof(int);
+
+    int maxprofit = o_1knapsack(p,w,knapsack,n);
+    cout<<"maxprofit ="<<maxprofit<<endl;
+
+    cout<<"selected item"<<endl;
+    for(auto h: v){
+        cout<<h<<" ";
+    }
+
+
+
+}
