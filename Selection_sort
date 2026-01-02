@@ -1,0 +1,43 @@
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+void selection_sort(int arr[],int n){
+    for(int i=0;i<n-1;i++){
+        int Min = i;
+
+        for(int j= i+1 ;j<n;j++){        ////j=i+1 karon protom index Min dorsi 
+            if(arr[j]<arr[Min]){  //min element find kortesi
+                Min=j;
+            }
+        }
+        int temp=arr[i];  // u can use swap function
+        arr[i]=arr[Min];
+        arr[Min]=temp;
+    }
+
+}
+
+
+ void print_sorting(int arr[],int n){
+    for(int i=0;i<n;i++){
+        cout<<arr[i];
+    }
+    }
+
+
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+
+    selection_sort(arr,n);
+    print_sorting(arr,n);
+
+
+}
