@@ -1,63 +1,68 @@
 
+
+
 #include<bits/stdc++.h>
 using namespace std;
-int num[]={7,1,5,10,3,11};
-int c[6]={};
+int num[100];
+int c[]={0};
 
-void merging(int L, int Mid, int H){
-    int i=L , j=Mid+1, k=L;
-    while(i<=Mid && j<=H){
-    if(num[i]<num[j]){
+void merging(int l,int mid,int h){
+    int i=l,j=mid+1,k=l;
+    while(i<=mid && j<=h){
+       if(num[i]<num[j]){
+        c[k]=num[i];
+        i++;
+        k++;
+
+       }
+       else{
+        c[k]=num[j];
+        j++;
+        k++;
+       }
+    }
+    for(; i<=mid;i++){
         c[k]=num[i];
         k++;
-        i++;
     }
-    else{
+    for(; j<=h;j++){
         c[k]=num[j];
         k++;
-        j++;
     }
-}
 
-
-    for( ; i<=Mid;i++) {
-            c[k]=num[i];
-             k++;
-    }
-      for( ; j<=H;j++) {
-            c[k]=num[j] ;
-            k++;
-      }
-
-
-
-
-       for(int i=L;i<k;i++){
-        num[i]=c[i];
-       }
+  for(int i=l;i<k;i++){
+    num[i]=c[i];
+  }
 
 
 }
 
-
-void mergesort(int L,int H){
-    if(L<H){
-            int Mid = (L+H)/2;
-        mergesort(L,Mid);
-        mergesort(Mid+1,H);
-        merging(L,Mid,H);
+void mergesort(int l,int h){
+    if(l<h){
+            int mid=(l+h)/2;
+        mergesort(l,mid);
+        mergesort(mid+1,h);
+        merging(l,mid,h);
     }
 
 }
-
-
 
 int main(){
-    int n=6;
-    mergesort(0,5);
+
+    int n;cin>>n;
     for(int i=0;i<n;i++){
-        cout<<num[i]<<" ";
+        cin>>num[i];
+    }
+    mergesort(0,n-1);
+    for(int i=0;i<n;i++){
+        cout<<num[i];
     }
 
 
+
+
 }
+
+
+
+
